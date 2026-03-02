@@ -1,0 +1,94 @@
+Customer Response Template (Plain Text)
+=======================================
+
+Purpose: Professional customer-facing email/case update
+Format: PLAIN TEXT ONLY - no markdown formatting
+
+--------------------------------------------------------------------------------
+                              TEMPLATE
+--------------------------------------------------------------------------------
+
+Hello,
+
+Thank you for your patience while we investigated [case description].
+
+ROOT CAUSE
+----------
+[Explain in plain English what caused the issue. 2-3 sentences max.
+No jargon, no confidence percentages, no pattern IDs.]
+
+RESOLUTION
+----------
+[What Engineering/TAC is doing to fix it, OR steps customer should take]
+
+1. [First step with specific details]
+2. [Second step]
+3. [Third step if needed]
+
+NEXT STEPS
+----------
+[What happens next - who does what, any timeline if known]
+
+Please let us know if you have any questions.
+
+Best regards,
+[Your Name]
+Palo Alto Networks TAC
+
+--------------------------------------------------------------------------------
+                           GUIDELINES
+--------------------------------------------------------------------------------
+
+DO:
+- Use plain, clear language
+- Be specific about resolution steps
+- Acknowledge customer's patience
+- Offer continued support
+
+DON'T:
+- Use markdown (##, **, -, etc.)
+- Include confidence percentages
+- Reference internal tools (CAPPY, pattern IDs)
+- Include raw log snippets
+- Make timeline promises you can't keep
+
+TONE:
+- Professional and empathetic
+- Clear and concise
+- Actionable
+
+--------------------------------------------------------------------------------
+                           EXAMPLE
+--------------------------------------------------------------------------------
+
+Hello,
+
+Thank you for your patience while we investigated the platform slowness
+after your upgrade to XSIAM 3.3.
+
+ROOT CAUSE
+----------
+The issue is backend resource contention. After the upgrade, the platform
+requires more resources than currently allocated to your tenant. This is
+entirely server-side - your network and configuration are working correctly.
+
+RESOLUTION
+----------
+We've escalated this to Engineering to increase the backend resource
+allocation for your tenant. This is the same resolution that worked for
+other customers with identical symptoms.
+
+1. Engineering will review resource allocation for your tenant
+2. They will apply the resource increase (similar to previous cases)
+3. We'll confirm with you once complete
+
+NEXT STEPS
+----------
+No action required from you. We'll update you once Engineering confirms
+the resource adjustment has been applied.
+
+Please let us know if you have any questions or if the situation changes.
+
+Best regards,
+Kevin Tan
+Palo Alto Networks TAC

@@ -1,0 +1,24 @@
+{
+  "name": "cappy-toolkit",
+  "version": "2.0.0",
+  "description": "CAPPY - AI-Powered Pattern Analysis for security investigations. Provides 8-phase investigation methodology, 540+ patterns, 28 MCP tools, and AI-powered synthesis for security product troubleshooting.",
+  "author": {
+    "name": "Kevin Francis Tan",
+    "email": "kf.tan@lightarchitects.io"
+  },
+  "repository": "https://github.com/theLightArchitect/CAPPY",
+  "license": "MIT",
+  "keywords": [
+    "security",
+    "investigation",
+    "detection-response",
+    "troubleshooting",
+    "pattern-analysis",
+    "mcp",
+    "ai-tools",
+    "rust"
+  ],
+  "mcpServers": "./.mcp.json",
+  "skills": "./skills/",
+  "commands": "./commands/"
+}

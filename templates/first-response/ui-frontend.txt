@@ -1,0 +1,50 @@
+EVIDENCE REQUEST: UI/Frontend Issue
+=====================================
+
+To investigate this issue, please provide the following:
+
+
+REQUIRED (in order of priority):
+
+1. HAR File (Network capture)
+   - Open Chrome DevTools (F12) -> Network tab
+   - Check "Preserve log" checkbox
+   - IMPORTANT: Refresh the page first (this captures initialization)
+   - Reproduce the issue
+   - Right-click -> "Save all as HAR with content"
+
+2. Browser Console Errors
+   - DevTools -> Console tab
+   - Filter by "Errors" (red icons)
+   - Right-click -> "Save as..." or copy error text with stack trace
+
+3. Screenshot showing the issue
+   - Before state (if applicable)
+   - Current broken state
+   - Any error messages visible on screen
+
+4. Server Version
+   - Go to Settings -> About
+   - Copy the full version string (e.g., XSOAR 8.7.0 Build 12345678)
+
+
+OPTIONAL (if applicable):
+
+5. Browser Information
+   - Browser type and version (e.g., Chrome 120)
+   - Any extensions installed that might interfere
+   - Did you test in Private/Incognito mode?
+
+6. User Role/Permissions
+   - What role is the affected user assigned?
+   - Does the issue occur for admin users as well?
+
+
+TIMEFRAME:
+
+Please ensure evidence covers the time period when the issue occurred.
+
+
+Thank you,
+[Your Name]
+TAC Engineer

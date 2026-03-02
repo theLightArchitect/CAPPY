@@ -1,0 +1,32 @@
+# Build artifacts
+target/
+*.o
+*.d
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Environment
+.env
+.env.local
+
+# Logs
+*.log
+logs/
+
+# Databases (full pattern databases are not committed)
+databases/cappy-cache_latest.json
+databases/cappy-cases.json
+databases/cappy-metrics.json
+
+# Temporary files
+tmp/
+*.tmp

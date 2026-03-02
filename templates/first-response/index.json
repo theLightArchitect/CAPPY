@@ -1,0 +1,164 @@
+{
+  "version": "1.0.0",
+  "description": "First-response template index for evidence collection",
+  "categories": {
+    "ui-frontend": {
+      "template": "ui-frontend.txt",
+      "keywords": ["button", "ui", "page", "layout", "missing", "not loading", "not visible", "display", "screen", "click", "frontend"],
+      "required_evidence": ["har", "console_errors", "screenshot", "server_version"],
+      "optional_evidence": ["browser_info", "user_role"]
+    },
+    "integration-error": {
+      "template": "integration-error.txt",
+      "keywords": ["integration", "timeout", "connection", "auth", "401", "403", "500", "ssl", "certificate", "api", "command failed"],
+      "required_evidence": ["integration_config", "test_output", "server_logs", "server_version"],
+      "optional_evidence": ["network_diagram", "proxy_config", "certificate_chain"]
+    },
+    "playbook-error": {
+      "template": "playbook-error.txt",
+      "keywords": ["playbook", "task", "loop", "input", "mapping", "workflow", "automation", "trigger", "sub-playbook"],
+      "required_evidence": ["playbook_export", "work_plan_screenshot", "incident_context", "task_error"],
+      "optional_evidence": ["incident_type_config", "pre_process_rules"]
+    },
+    "performance": {
+      "template": "performance.txt",
+      "keywords": ["slow", "performance", "cpu", "memory", "oom", "timeout", "lag", "high", "resource", "degraded"],
+      "required_evidence": ["log_bundle", "resource_metrics", "incident_count", "server_version"],
+      "optional_evidence": ["har", "database_stats", "job_queue"]
+    },
+    "content-pack": {
+      "template": "content-pack.txt",
+      "keywords": ["pack", "content", "marketplace", "install", "update", "dependency", "version"],
+      "required_evidence": ["error_message", "content_versions", "server_logs", "server_version"],
+      "optional_evidence": ["pack_structure", "dependency_list"]
+    }
+  },
+  "evidence_types": {
+    "har": {
+      "name": "HAR File",
+      "description": "HTTP Archive file from browser DevTools",
+      "priority": 1,
+      "instructions": "DevTools → Network → Preserve log → Refresh → Reproduce → Save as HAR"
+    },
+    "console_errors": {
+      "name": "Browser Console Errors",
+      "description": "JavaScript errors from browser console",
+      "priority": 2,
+      "instructions": "DevTools → Console → Filter Errors → Save or copy"
+    },
+    "screenshot": {
+      "name": "Screenshot",
+      "description": "Visual capture of the issue",
+      "priority": 3,
+      "instructions": "Capture before state, broken state, and any visible errors"
+    },
+    "server_version": {
+      "name": "Server Version",
+      "description": "Full version string from About page",
+      "priority": 4,
+      "instructions": "Settings → About → Copy full version"
+    },
+    "server_logs": {
+      "name": "Server Logs",
+      "description": "Log bundle with debug enabled",
+      "priority": 1,
+      "instructions": "Enable debug → Reproduce → Download logs"
+    },
+    "log_bundle": {
+      "name": "Log Bundle",
+      "description": "Complete log bundle tar.gz",
+      "priority": 1,
+      "instructions": "Settings → Troubleshooting → Download Logs"
+    },
+    "integration_config": {
+      "name": "Integration Configuration",
+      "description": "Integration settings (REDACT CREDENTIALS)",
+      "priority": 1,
+      "instructions": "Export config, redact API keys and passwords"
+    },
+    "test_output": {
+      "name": "Test Command Output",
+      "description": "Output from !test-module or failing command",
+      "priority": 2,
+      "instructions": "Run command in War Room, copy full output"
+    },
+    "playbook_export": {
+      "name": "Playbook Export",
+      "description": "Playbook JSON/YAML export",
+      "priority": 1,
+      "instructions": "Playbooks → Export → JSON/YAML"
+    },
+    "work_plan_screenshot": {
+      "name": "Work Plan Screenshot",
+      "description": "Screenshot of incident work plan",
+      "priority": 2,
+      "instructions": "Incident → Work Plan → Expand failing task → Screenshot"
+    },
+    "incident_context": {
+      "name": "Incident Context",
+      "description": "Context data JSON from !getContext",
+      "priority": 3,
+      "instructions": "War Room → !getContext → Copy output"
+    },
+    "task_error": {
+      "name": "Task Error Details",
+      "description": "Full error message from failed task",
+      "priority": 1,
+      "instructions": "Click task → View error → Copy with stack trace"
+    },
+    "resource_metrics": {
+      "name": "Resource Metrics",
+      "description": "CPU/Memory/Disk usage metrics",
+      "priority": 2,
+      "instructions": "docker stats, kubectl top, or monitoring dashboard"
+    },
+    "incident_count": {
+      "name": "Incident Count",
+      "description": "Total and active incident counts",
+      "priority": 3,
+      "instructions": "!getIncidentCount and !getIncidentCount status:Active"
+    },
+    "error_message": {
+      "name": "Error Message",
+      "description": "Full error text from failure",
+      "priority": 1,
+      "instructions": "Screenshot or copy complete error"
+    },
+    "content_versions": {
+      "name": "Content Versions",
+      "description": "Pack version info",
+      "priority": 2,
+      "instructions": "Current installed version vs target version"
+    },
+    "user_role": {
+      "name": "User Role Config",
+      "description": "Role and permissions for affected user",
+      "priority": 5,
+      "instructions": "Settings → Users → User roles and permissions"
+    },
+    "browser_info": {
+      "name": "Browser Information",
+      "description": "Browser type, version, extensions",
+      "priority": 6,
+      "instructions": "Browser type, version, and list of extensions"
+    },
+    "network_diagram": {
+      "name": "Network Diagram",
+      "description": "Network path from XSOAR to target",
+      "priority": 5,
+      "instructions": "XSOAR → Proxy/LB → Target service diagram"
+    },
+    "proxy_config": {
+      "name": "Proxy Configuration",
+      "description": "Proxy settings if applicable",
+      "priority": 5,
+      "instructions": "Proxy type, address, port, auth settings"
+    },
+    "certificate_chain": {
+      "name": "Certificate Chain",
+      "description": "SSL/TLS certificate information",
+      "priority": 5,
+      "instructions": "Full certificate chain for self-signed or internal CA"
+    }
+  }
+}

@@ -1,0 +1,71 @@
+EVIDENCE REQUEST: Playbook Error
+=================================
+
+To investigate this playbook issue, please provide the following:
+
+
+REQUIRED (in order of priority):
+
+1. Playbook Export
+   - Go to Playbooks -> [Playbook Name] -> Export
+   - Format: JSON or YAML
+   - If the playbook uses sub-playbooks, please export those as well
+
+2. Work Plan Screenshot
+   - Open the affected incident -> Work Plan tab
+   - Expand the failing task
+   - Take a screenshot showing task status and error message
+   - If it's a loop issue, show the iteration count
+
+3. Incident Context
+   - In the War Room, run: !getContext
+   - Or: Go to Incident -> Context Data and export as JSON
+   - This shows all available data for input mapping
+
+4. Task Error Details
+   - Click on the failed task -> View error
+   - Copy the full error message including stack trace
+   - Include the Entry ID if available
+
+5. Server Version
+   - Go to Settings -> About
+   - Copy the full version string
+
+
+FOR INPUT MAPPING FAILURES, also include:
+
+- The expected input path (e.g., ${incident.src})
+- Screenshot of context showing whether the data exists
+- Any transformer applied to the input
+
+
+FOR LOOP ISSUES, also include:
+
+- Loop configuration (forEach item, condition)
+- Expected vs actual number of iterations
+- Memory usage during loop execution (if available)
+
+
+FOR TRIGGER ISSUES, also include:
+
+- Incident type configuration
+- Pre-processing rules (if any)
+- Playbook trigger conditions
+
+
+TIMEFRAME:
+
+Please provide evidence from incident creation to current state.
+
+
+PRE-CHECK QUESTIONS:
+
+- Is this a custom playbook or out-of-the-box (OOTB)?
+- When did it last work correctly?
+- Does it fail on all incidents or only specific ones?
+- Any recent content updates or playbook edits?
+
+
+Thank you,
+[Your Name]
+TAC Engineer

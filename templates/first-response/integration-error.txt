@@ -1,0 +1,66 @@
+EVIDENCE REQUEST: Integration Error
+====================================
+
+To investigate this integration issue, please provide the following:
+
+
+REQUIRED (in order of priority):
+
+1. Integration Instance Configuration
+   - Go to Settings -> Integrations -> [Integration Name]
+   - Export the configuration or take a screenshot
+   - IMPORTANT: Please redact/hide any API keys, passwords, or tokens
+   - We need the parameter settings, not the credentials
+
+2. Test Command Output
+   - Run !test-module or the specific failing command
+   - Copy the full output including any error messages
+   - Note the timestamp when the test was run
+
+3. Server Logs (debug level)
+   - Enable debug logging: Settings -> Troubleshooting -> Enable Debug
+   - Reproduce the issue
+   - Download logs covering the timeframe of the issue
+   - Key files we need: server.log, sdk-debug.log
+
+4. Server Version
+   - Go to Settings -> About
+   - Copy the full version string
+
+
+FOR TIMEOUT ISSUES, also include:
+
+- Network path diagram (XSOAR -> Proxy -> Target)
+- Proxy/Load Balancer configuration if applicable
+- Output of curl test from XSOAR host to target endpoint
+
+
+FOR AUTHENTICATION FAILURES, also include:
+
+- Authentication method used (API Key, OAuth, Basic Auth, etc.)
+- When was the credential/token created? Has it expired?
+- Any recent password or API key rotations?
+
+
+FOR SSL/TLS ERRORS, also include:
+
+- Certificate chain (if using self-signed or internal CA)
+- SSL verification setting in the integration config
+
+
+TIMEFRAME:
+
+Please ensure logs cover: 10 minutes before issue to 10 minutes after
+
+
+PRE-CHECK QUESTIONS:
+
+- Was this integration working previously? When did it stop?
+- Any recent changes (upgrade, config change, network change)?
+- Does the issue affect all commands or specific ones?
+- Does it work from another XSOAR instance or via direct API call?
+
+
+Thank you,
+[Your Name]
+TAC Engineer

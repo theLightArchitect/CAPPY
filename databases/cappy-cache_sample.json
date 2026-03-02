@@ -1,0 +1,380 @@
+{
+  "version": "5.8.0",
+  "generated": "2026-02-22T00:00:00Z",
+  "pattern_count": 10,
+  "note": "Sample patterns demonstrating schema structure. Full database contains 540 patterns.",
+  "patterns": [
+    {
+      "pattern_id": "P001",
+      "title": "Memory exhaustion during large playbook execution",
+      "product": "XSOAR",
+      "component": "engine",
+      "confidence": "Definitive",
+      "version_range": { "min": "6.0.0", "max": "8.99.99" },
+      "symptoms": [
+        "OOM killer terminates process during playbook run",
+        "Playbook with 500+ tasks fails mid-execution"
+      ],
+      "match_patterns": [
+        "Out of memory.*playbook",
+        "oom-kill.*xsoar"
+      ],
+      "exclude_if": [
+        "docker.*oom"
+      ],
+      "causality_chain": [
+        "Large playbook loaded into memory",
+        "Task results accumulate without cleanup",
+        "Memory exceeds container/host limit",
+        "OOM killer terminates process"
+      ],
+      "root_cause": "Playbook engine retains all intermediate task results in memory. For playbooks with >500 tasks, cumulative memory exceeds allocated limits.",
+      "resolution": {
+        "steps": [
+          "Increase memory allocation to 8GB minimum",
+          "Split large playbooks into sub-playbooks",
+          "Enable incremental result cleanup in engine settings"
+        ],
+        "workaround": "Break playbook into smaller chunks with manual chaining",
+        "fix_version": "8.4.0"
+      },
+      "tags": ["memory", "oom", "playbook", "engine"],
+      "created": "2026-01-01",
+      "updated": "2026-01-15"
+    },
+    {
+      "pattern_id": "P002",
+      "title": "SSL certificate validation failure on proxy environments",
+      "product": "SHARED",
+      "component": "networking",
+      "confidence": "Strong",
+      "version_range": { "min": "6.0.0", "max": "8.99.99" },
+      "symptoms": [
+        "Integration test fails with SSL error",
+        "Certificate verify failed for external API calls"
+      ],
+      "match_patterns": [
+        "SSL: CERTIFICATE_VERIFY_FAILED",
+        "unable to get local issuer certificate"
+      ],
+      "exclude_if": [],
+      "causality_chain": [
+        "Corporate proxy performs TLS inspection",
+        "Proxy CA certificate not in trust store",
+        "Integration HTTP client rejects proxy certificate"
+      ],
+      "root_cause": "Corporate proxy CA certificate not added to the application trust store. TLS inspection breaks certificate chain validation.",
+      "resolution": {
+        "steps": [
+          "Obtain proxy CA certificate from IT team",
+          "Add CA cert to /etc/ssl/certs/ca-certificates.crt",
+          "Set REQUESTS_CA_BUNDLE environment variable",
+          "Restart the service"
+        ],
+        "workaround": "Set SSL_CERT_FILE to point to proxy CA bundle"
+      },
+      "tags": ["ssl", "proxy", "certificate", "networking"],
+      "created": "2026-01-01",
+      "updated": "2026-01-10"
+    },
+    {
+      "pattern_id": "P003",
+      "title": "Log ingestion pipeline backpressure causing data loss",
+      "product": "XSIAM",
+      "component": "ingestion",
+      "confidence": "Definitive",
+      "version_range": { "min": "3.0.0", "max": "3.99.99" },
+      "symptoms": [
+        "Missing logs in search results",
+        "Ingestion rate drops to zero periodically",
+        "Broker VM shows queue full warnings"
+      ],
+      "match_patterns": [
+        "queue.*full.*dropping",
+        "backpressure.*ingestion"
+      ],
+      "exclude_if": [
+        "maintenance.*window"
+      ],
+      "causality_chain": [
+        "Log source burst exceeds pipeline capacity",
+        "Internal queues fill to capacity",
+        "Backpressure signal propagates to collectors",
+        "New events dropped until queue drains"
+      ],
+      "root_cause": "Default queue sizes insufficient for burst traffic patterns. Pipeline lacks dynamic scaling for temporary overload.",
+      "resolution": {
+        "steps": [
+          "Increase queue depth in collector configuration",
+          "Enable disk-based overflow queuing",
+          "Configure rate limiting at source",
+          "Monitor queue utilization with alerts"
+        ],
+        "workaround": "Reduce log verbosity at source during peak hours"
+      },
+      "tags": ["ingestion", "backpressure", "data-loss", "queue"],
+      "created": "2026-01-05",
+      "updated": "2026-02-01"
+    },
+    {
+      "pattern_id": "P004",
+      "title": "Agent upgrade fails silently on low disk space",
+      "product": "XDR",
+      "component": "agent",
+      "confidence": "Strong",
+      "version_range": { "min": "7.0.0", "max": "8.99.99" },
+      "symptoms": [
+        "Agent version unchanged after upgrade push",
+        "No error in management console",
+        "Agent reports as connected but old version"
+      ],
+      "match_patterns": [
+        "upgrade.*failed.*disk",
+        "insufficient.*space.*update"
+      ],
+      "exclude_if": [],
+      "causality_chain": [
+        "Upgrade package downloaded to temp directory",
+        "Extraction fails due to insufficient disk space",
+        "Rollback restores previous version silently",
+        "Management console not notified of failure"
+      ],
+      "root_cause": "Agent upgrade process requires 2x package size in free disk space for extraction + rollback copy. Failure is not propagated to management console.",
+      "resolution": {
+        "steps": [
+          "Free disk space on endpoint (minimum 500MB)",
+          "Re-push upgrade from management console",
+          "Verify upgrade via agent CLI: agent_status --version"
+        ],
+        "workaround": "Clean temp directories before upgrade push"
+      },
+      "tags": ["agent", "upgrade", "disk-space", "silent-failure"],
+      "created": "2026-01-10",
+      "updated": "2026-01-20"
+    },
+    {
+      "pattern_id": "P005",
+      "title": "SAML SSO authentication loop",
+      "product": "SHARED",
+      "component": "authentication",
+      "confidence": "Strong",
+      "version_range": { "min": "6.0.0", "max": "8.99.99" },
+      "symptoms": [
+        "User redirected repeatedly between IdP and application",
+        "Login page reloads after successful IdP authentication",
+        "Browser shows too many redirects error"
+      ],
+      "match_patterns": [
+        "SAML.*assertion.*expired",
+        "clock.*skew.*authentication",
+        "redirect.*loop.*saml"
+      ],
+      "exclude_if": [
+        "password.*expired"
+      ],
+      "causality_chain": [
+        "IdP issues SAML assertion with timestamp",
+        "Clock skew between IdP and SP exceeds tolerance",
+        "SP rejects assertion as expired",
+        "SP redirects back to IdP for new assertion",
+        "Loop continues until browser limit"
+      ],
+      "root_cause": "Clock synchronization difference between Identity Provider and Service Provider exceeds the SAML assertion validity window (typically 5 minutes).",
+      "resolution": {
+        "steps": [
+          "Sync NTP on both IdP and SP servers",
+          "Increase SAML clock skew tolerance to 300 seconds",
+          "Verify with: date on both systems, check difference"
+        ],
+        "workaround": "Temporarily increase NotOnOrAfter tolerance"
+      },
+      "tags": ["saml", "sso", "authentication", "clock-skew"],
+      "created": "2026-01-01",
+      "updated": "2026-01-15"
+    },
+    {
+      "pattern_id": "P006",
+      "title": "HAR file analysis timeout on files >100MB",
+      "product": "SHARED",
+      "component": "forensics",
+      "confidence": "Moderate",
+      "version_range": { "min": "1.0.0", "max": "2.99.99" },
+      "symptoms": [
+        "HAR analysis returns timeout error",
+        "Large HAR file from long browser session"
+      ],
+      "match_patterns": [
+        "timeout.*har.*analysis",
+        "har.*file.*too.*large"
+      ],
+      "exclude_if": [],
+      "causality_chain": [
+        "User captures HAR over extended period",
+        "HAR file exceeds 100MB",
+        "JSON parser loads entire file into memory",
+        "Analysis exceeds default timeout"
+      ],
+      "root_cause": "HAR forensics module loads entire file into memory for JSON parsing. Files over 100MB exceed the default analysis timeout.",
+      "resolution": {
+        "steps": [
+          "Trim HAR file to relevant time window",
+          "Use streaming HAR parser for large files",
+          "Increase analysis timeout via CAPPY_TIMEOUT_SECS"
+        ],
+        "workaround": "Split HAR recording into shorter sessions"
+      },
+      "tags": ["har", "forensics", "timeout", "large-file"],
+      "created": "2026-01-20",
+      "updated": "2026-02-01"
+    },
+    {
+      "pattern_id": "P007",
+      "title": "Integration rate limiting causing intermittent failures",
+      "product": "XSOAR",
+      "component": "integrations",
+      "confidence": "Definitive",
+      "version_range": { "min": "6.0.0", "max": "8.99.99" },
+      "symptoms": [
+        "Integration commands fail intermittently",
+        "HTTP 429 errors in server logs",
+        "Success rate drops during peak hours"
+      ],
+      "match_patterns": [
+        "429.*Too Many Requests",
+        "rate.*limit.*exceeded",
+        "throttl.*integration"
+      ],
+      "exclude_if": [],
+      "causality_chain": [
+        "Multiple playbooks invoke same integration concurrently",
+        "API rate limit on external service exceeded",
+        "HTTP 429 returned to integration command",
+        "Command fails, playbook error handling triggers"
+      ],
+      "root_cause": "No request rate limiting or queuing between playbook engine and external API integrations. Concurrent playbook executions can exceed API provider rate limits.",
+      "resolution": {
+        "steps": [
+          "Configure integration instance with rate limit settings",
+          "Enable request queuing in engine configuration",
+          "Implement exponential backoff in custom integrations"
+        ],
+        "workaround": "Reduce concurrent playbook execution limit"
+      },
+      "tags": ["rate-limit", "integration", "429", "throttling"],
+      "created": "2026-01-05",
+      "updated": "2026-01-25"
+    },
+    {
+      "pattern_id": "P008",
+      "title": "Content pack installation fails with dependency conflict",
+      "product": "XSOAR",
+      "component": "marketplace",
+      "confidence": "Strong",
+      "version_range": { "min": "6.5.0", "max": "8.99.99" },
+      "symptoms": [
+        "Content pack install fails with dependency error",
+        "Marketplace shows pack as available but install fails",
+        "Error message references version mismatch"
+      ],
+      "match_patterns": [
+        "dependency.*conflict.*pack",
+        "version.*mismatch.*content"
+      ],
+      "exclude_if": [],
+      "causality_chain": [
+        "Pack A requires Pack B >= 2.0",
+        "Installed Pack B is 1.x",
+        "Marketplace dependency resolver fails",
+        "Installation aborted with conflict error"
+      ],
+      "root_cause": "Content pack dependency resolution does not automatically upgrade transitive dependencies. Conflicts must be resolved manually.",
+      "resolution": {
+        "steps": [
+          "Update conflicting dependency pack first",
+          "Then retry original pack installation",
+          "Use force-install only as last resort"
+        ],
+        "workaround": "Manually update dependency packs before installing"
+      },
+      "tags": ["content-pack", "dependency", "marketplace", "install"],
+      "created": "2026-01-10",
+      "updated": "2026-02-01"
+    },
+    {
+      "pattern_id": "P009",
+      "title": "Correlation rule false positives after dataset migration",
+      "product": "XSIAM",
+      "component": "analytics",
+      "confidence": "Moderate",
+      "version_range": { "min": "3.0.0", "max": "3.99.99" },
+      "symptoms": [
+        "Alert volume spikes after data migration",
+        "Correlation rules trigger on historical data",
+        "False positive rate increases significantly"
+      ],
+      "match_patterns": [
+        "correlation.*spike.*migration",
+        "false.*positive.*after.*import"
+      ],
+      "exclude_if": [
+        "new.*rule.*deployment"
+      ],
+      "causality_chain": [
+        "Historical data migrated into new dataset",
+        "Correlation engine processes migrated data as new events",
+        "Time-based rules trigger on old timestamps",
+        "Alert volume spikes with false positives"
+      ],
+      "root_cause": "Correlation engine does not distinguish between newly ingested events and migrated historical data. Time-windowed rules process all data regardless of original timestamp.",
+      "resolution": {
+        "steps": [
+          "Temporarily disable affected correlation rules during migration",
+          "Re-enable rules after migration completes",
+          "Set data start time filter on correlation rules"
+        ],
+        "workaround": "Suppress alerts from migrated data source during migration window"
+      },
+      "tags": ["correlation", "false-positive", "migration", "analytics"],
+      "created": "2026-01-15",
+      "updated": "2026-02-10"
+    },
+    {
+      "pattern_id": "P010",
+      "title": "Docker container restart loop on config validation failure",
+      "product": "XSOAR",
+      "component": "deployment",
+      "confidence": "Definitive",
+      "version_range": { "min": "6.0.0", "max": "8.99.99" },
+      "symptoms": [
+        "Container restarts every 30 seconds",
+        "Config validation error in container logs",
+        "Service unavailable despite container running"
+      ],
+      "match_patterns": [
+        "config.*validation.*failed.*restart",
+        "CrashLoopBackOff.*xsoar"
+      ],
+      "exclude_if": [],
+      "causality_chain": [
+        "Configuration change introduces invalid value",
+        "Application startup validates configuration",
+        "Validation fails, process exits with error",
+        "Container orchestrator restarts container",
+        "Loop continues with same invalid config"
+      ],
+      "root_cause": "Application validates configuration at startup but does not provide a recovery mechanism. Invalid configuration causes perpetual restart loop.",
+      "resolution": {
+        "steps": [
+          "Stop container: docker stop <container>",
+          "Fix configuration file with correct values",
+          "Validate config: cappy-core config validate",
+          "Restart container"
+        ],
+        "workaround": "Mount corrected config and restart manually"
+      },
+      "tags": ["docker", "restart-loop", "config", "deployment"],
+      "created": "2026-01-01",
+      "updated": "2026-01-20"
+    }
+  ]
+}

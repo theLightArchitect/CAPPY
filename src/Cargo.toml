@@ -1,0 +1,118 @@
+[package]
+name = "cappy-core"
+version = "1.7.0"
+edition = "2021"
+description = "CAPPY Core - Unified Rust orchestration for TAC investigations"
+authors = ["Kevin Tan <kf.tan@lightarchitects.io>"]
+license = "MIT"
+repository = "https://github.com/theLightArchitect/CAPPY"
+
+[lib]
+name = "cappy_core"
+path = "src/lib.rs"
+
+[[bin]]
+name = "cappy-core"
+path = "src/main.rs"
+
+[[bin]]
+name = "analyze-violations"
+path = "src/bin/analyze_violations.rs"
+
+# Note: cappy-viewer functionality consolidated into cappy-core as 'viewer' subcommand
+# Usage: cappy-core viewer video info /path/to/file.mp4
+
+[dependencies]
+# CLI
+clap = { version = "4", features = ["derive", "env"] }
+
+# Async runtime
+tokio = { version = "1", features = ["full"] }
+
+# HTTP/SSE (for gateway module)
+reqwest = { version = "0.12", default-features = false, features = ["json", "stream", "rustls-tls", "blocking"] }
+reqwest-eventsource = "0.6"
+
+# Serialization
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# Error handling
+anyhow = "1"
+thiserror = "1"
+
+# Regex (for DataGuard patterns)
+regex = "1"
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# Async utilities
+futures-util = "0.3"
+async-stream = "0.3"
+
+# Date/time
+chrono = { version = "0.4", features = ["serde"] }
+
+# UUID generation
+uuid = { version = "1", features = ["v4", "serde"] }
+
+# Home directory detection
+dirs = "5"
+
+# Lazy static initialization
+lazy_static = "1"
+
+# Async trait support
+async-trait = "0.1"
+
+# Base64 encoding/decoding (for HAR image extraction)
+base64 = "0.22"
+
+# JSON forensics (G-07, G-08)
+jsonpath-rust = "0.5"
+similar = "2.4"
+
+# Parallel processing (for large HAR files)
+rayon = "1.10"
+
+# Glob pattern matching (G-02)
+glob = "0.3"
+
+# URL encoding (for Confluence CQL queries)
+urlencoding = "2.1"
+
+# CPU detection (for Ollama preflight)
+num_cpus = "1.16"
+
+# Tar/gzip for incident performance export analysis
+flate2 = "1.0"
+tar = "0.4"
+
+# Temp file/directory handling (for tar.gz extraction)
+tempfile = "3"
+
+# Cross-platform browser opening (for TACO Spot)
+open = "5"
+
+# Hostname detection (for file locking)
+hostname = "0.4"
+
+# GCS streaming (P-003)
+cloud-storage = "0.11"
+
+[dev-dependencies]
+tokio-test = "0.4"
+mockall = "0.13"
+criterion = { version = "0.5", features = ["html_reports"] }
+
+[[bench]]
+name = "analytics_bench"
+harness = false
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+strip = true

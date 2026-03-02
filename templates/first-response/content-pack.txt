@@ -1,0 +1,76 @@
+EVIDENCE REQUEST: Content Pack Issue
+=====================================
+
+To investigate this content pack issue, please provide the following:
+
+
+REQUIRED (in order of priority):
+
+1. Error Message
+   - Full error text from the installation or update attempt
+   - Screenshot of the error dialog
+   - Screenshot of the Marketplace page showing pack status
+
+2. Content Versions
+   - Current pack version installed (if any)
+   - Target pack version you're trying to install
+   - XSOAR content version: Go to Settings -> About
+
+3. Server Logs
+   - Download logs immediately after the failure
+   - Key files: marketplace.log, server.log
+   - Search logs for the pack name
+
+4. Server Version
+   - Go to Settings -> About
+   - Copy the full version string
+   - Note the license type: XSOAR or XSIAM
+
+
+FOR MARKETPLACE CONNECTION ISSUES, also include:
+
+- Can you access marketplace.your-vendor.example.com from the server?
+- Proxy configuration if the server is behind a proxy
+- Firewall rules for outbound HTTPS (port 443)
+
+
+FOR DEPENDENCY CONFLICTS, also include:
+
+- List of currently installed packs
+- Which other packs depend on the failing pack?
+- Output of: !platform-internal dependencies
+
+
+FOR UPLOAD FAILURES (custom content), also include:
+
+- Content pack structure (list the zip contents)
+- The content-descriptor.json file
+- Any validation errors shown during upload
+
+
+TIMEFRAME:
+
+Please ensure logs cover: 5 minutes before install attempt to 5 minutes after
+
+
+PRE-CHECK QUESTIONS:
+
+- Is this an OOTB (out-of-the-box) pack or custom content?
+- Is this a fresh install or an upgrade of an existing pack?
+- Did this pack work on a previous server version?
+- Have other packs installed successfully recently?
+- Is this an air-gapped environment (offline installation)?
+
+
+QUICK COMMANDS TO TEST:
+
+  From the server, test marketplace connectivity:
+  curl -I https://marketplace.your-vendor.example.com
+
+  From War Room, list installed packs:
+  !core-api-get uri=/contentpacks/installed
+
+
+Thank you,
+[Your Name]
+TAC Engineer

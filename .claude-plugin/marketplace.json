@@ -1,0 +1,18 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "cappy",
+  "version": "1.0.0",
+  "description": "CAPPY Investigation Toolkit",
+  "owner": {
+    "name": "Kevin Francis Tan",
+    "email": "kf.tan@lightarchitects.io"
+  },
+  "plugins": [
+    {
+      "name": "cappy-toolkit",
+      "description": "AI-Powered Pattern Analysis for security investigations",
+      "source": ".",
+      "category": "investigation"
+    }
+  ]
+}

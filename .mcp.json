@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "cappy": {
+      "command": "${CAPPY_HOME:-$HOME/.cappy}/bin/cappy-core",
+      "args": ["mcp-server"],
+      "env": {
+        "RUST_LOG": "info"
+      },
+      "description": "CAPPY Investigation Toolkit - AI-Powered Pattern Analysis"
+    }
+  }
+}

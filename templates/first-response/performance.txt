@@ -1,0 +1,81 @@
+EVIDENCE REQUEST: Performance Issue
+====================================
+
+To investigate this performance issue, please provide the following:
+
+
+REQUIRED (in order of priority):
+
+1. Log Bundle (debug level)
+   - Go to Settings -> Troubleshooting -> Download Logs
+   - IMPORTANT: Enable debug logging before reproducing
+   - Must cover the timeframe of slow performance
+
+2. Resource Metrics
+   - For Docker: Run "docker stats" during the issue and capture output
+   - For Kubernetes: Run "kubectl top pods -n <namespace>"
+   - Or: Screenshot from monitoring dashboard (CPU, Memory, Disk I/O)
+
+3. Incident and Data Volume
+   - Run in War Room: !getIncidentCount
+   - Run: !getIncidentCount status:Active
+   - Run: !getIndicatorCount
+   - Note the number of scheduled jobs
+
+4. Server Version and Architecture
+   - Go to Settings -> About -> Full version string
+   - Deployment type: Single-server / Multi-tenant / HA / Kubernetes
+   - Resource allocation: How many CPU cores, RAM, Disk size?
+
+
+FOR SLOW API/UI RESPONSE, also include:
+
+- HAR file showing slow requests
+- Which specific pages or operations are slow?
+- Is there a time-of-day pattern?
+
+
+FOR HIGH MEMORY USAGE, also include:
+
+- Memory allocation per container
+- Has there been a recent increase in data volume?
+- Which playbooks or integrations are currently running?
+
+
+FOR DATABASE PERFORMANCE, also include:
+
+- Database type: PostgreSQL / Elasticsearch / BoltDB
+- Database size and growth rate
+- When was the last index rebuild?
+
+
+TIMEFRAME:
+
+Please provide metrics comparing:
+- Normal period (when performance was acceptable)
+- Problem period (when performance degraded)
+
+Example:
+  Normal: Monday 9 AM, response time ~200ms
+  Problem: Tuesday 3 PM, response time ~5000ms
+
+
+PRE-CHECK QUESTIONS:
+
+- When did performance become an issue?
+- What is the normal vs current response time?
+- Any recent changes (upgrade, config change, data import)?
+- Does restarting services help temporarily?
+- Is there a time-of-day pattern (business hours vs off-hours)?
+
+
+QUICK COMMANDS TO RUN (on the server):
+
+  docker stats --no-stream
+  df -h
+  top -b -n 1 | head -20
+
+
+Thank you,
+[Your Name]
+TAC Engineer

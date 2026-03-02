@@ -1,0 +1,312 @@
+{
+  "_schema_version": "3.5.0",
+  "_template_note": "Copy this file to case directory and fill in values. All claims/evidence start UNVERIFIED.",
+
+  "case": {
+    "id": null,
+    "jira_id": null,
+    "jira_url": null,
+    "salesforce_url": null,
+    "customer": {
+      "name": null,
+      "account_id": null,
+      "region": null,
+      "tier": null,
+      "contact_name": null,
+      "contact_email": null
+    },
+    "severity": {
+      "initial": null,
+      "current": null,
+      "changed_at": null,
+      "change_reason": null
+    },
+    "priority": null,
+    "status": "INITIALIZING",
+    "ownership": {
+      "assigned_to": null,
+      "team": null,
+      "escalation_engineer": null,
+      "assigned_at": null
+    },
+    "tags": [],
+    "sla": {
+      "response_due": null,
+      "response_met": null,
+      "resolution_due": null,
+      "resolution_met": null
+    }
+  },
+
+  "environment": {
+    "product": null,
+    "version": null,
+    "build": null,
+    "patch_level": null,
+    "deployment": {
+      "type": null,
+      "region": null,
+      "tenant_id": null,
+      "instance_url": null
+    },
+    "architecture": {
+      "type": null,
+      "ha_enabled": null,
+      "cluster_size": null
+    },
+    "integrations": [],
+    "detection": {
+      "method": null,
+      "confidence": null,
+      "detected_at": null,
+      "confirmed_by_customer": false
+    }
+  },
+
+  "symptom": {
+    "summary": null,
+    "description": null,
+    "error_messages": [],
+    "reproduction": {
+      "steps": [],
+      "frequency": null,
+      "environment_specific": null
+    },
+    "impact": {
+      "description": null,
+      "affected_users": null,
+      "business_impact": null,
+      "workaround_available": false
+    },
+    "timeline": {
+      "started": null,
+      "reported": null,
+      "last_working": null,
+      "change_window": null
+    },
+    "customer_hypothesis": null
+  },
+
+  "evidence": {
+    "files": [],
+    "pending_requests": [],
+    "summary": {
+      "total_files": 0,
+      "total_size_bytes": 0,
+      "types": {}
+    }
+  },
+
+  "hypotheses": {
+    "current": null,
+    "list": [],
+    "selection_rationale": null
+  },
+
+  "sessions": {
+    "current_session": null,
+    "total_sessions": 0,
+    "list": [],
+    "handoffs": [],
+    "total_active_minutes": 0,
+    "total_wait_minutes": 0
+  },
+
+  "customer_interactions": {
+    "questions": [],
+    "responses_pending": 0,
+    "average_response_time_hours": null,
+    "calls": [],
+    "sentiment": {
+      "current": null,
+      "trajectory": null,
+      "notes": null
+    }
+  },
+
+  "related_cases": {
+    "linked": [],
+    "similar_found": [],
+    "duplicates": [],
+    "referenced_in_solution": []
+  },
+
+  "claims": [],
+
+  "research_queue": [],
+
+  "phases": {
+    "phase_0": { "status": "PENDING", "started_at": null, "completed_at": null, "duration_seconds": null },
+    "phase_1": { "status": "PENDING", "started_at": null, "completed_at": null, "duration_seconds": null },
+    "phase_2": { "status": "PENDING", "started_at": null, "completed_at": null, "duration_seconds": null },
+    "phase_3": { "status": "PENDING", "started_at": null, "completed_at": null, "duration_seconds": null },
+    "phase_4": { "status": "PENDING", "started_at": null, "completed_at": null, "duration_seconds": null },
+    "phase_5": { "status": "PENDING", "started_at": null, "completed_at": null, "duration_seconds": null },
+    "phase_6": { "status": "PENDING", "started_at": null, "completed_at": null, "duration_seconds": null },
+    "phase_7": { "status": "PENDING", "started_at": null, "completed_at": null, "duration_seconds": null }
+  },
+
+  "outcome": {
+    "status": null,
+    "resolved_at": null,
+    "classification": {
+      "type": null,
+      "category": null,
+      "component": null,
+      "severity_actual": null
+    },
+    "root_cause": {
+      "summary": null,
+      "details": null,
+      "citation": null
+    },
+    "resolution": {
+      "type": null,
+      "summary": null,
+      "effort": null,
+      "time_to_resolution_hours": null
+    },
+    "novelty": {
+      "is_novel": null,
+      "matched_patterns": [],
+      "pattern_gap_reason": null
+    },
+    "pattern_creation": {
+      "recommended": false,
+      "pattern_id": null,
+      "created_at": null,
+      "symptom": null,
+      "error_pattern": null,
+      "tags": []
+    }
+  },
+
+  "deliverables": {
+    "items": [],
+    "summary": {
+      "total": 0,
+      "sent": 0,
+      "pending_review": 0,
+      "draft": 0
+    }
+  },
+
+  "metrics": {
+    "efficiency": {
+      "time_to_resolution_days": null,
+      "time_to_resolution_hours": null,
+      "active_investigation_minutes": 0,
+      "idle_time_minutes": 0,
+      "sessions_count": 0,
+      "phases_completed": 0,
+      "phases_skipped": 0,
+      "checkpoints_passed": 0,
+      "checkpoints_blocked": 0,
+      "first_response_to_resolution_days": null
+    },
+    "tool_usage": {
+      "mcp_tool_calls": 0,
+      "mcp_tool_success_rate": null,
+      "manual_fallbacks": 0,
+      "tools_used": [],
+      "most_used_tool": null,
+      "tool_execution_time_ms": 0
+    },
+    "knowledge": {
+      "patterns_searched": 0,
+      "patterns_matched": 0,
+      "top_pattern_confidence": null,
+      "pattern_reuse": false,
+      "pattern_id_matched": null,
+      "novel_issue": false,
+      "new_pattern_created": false,
+      "docs_referenced": 0,
+      "jira_issues_referenced": 0,
+      "confluence_pages_referenced": 0
+    },
+    "quality": {
+      "claims_total": 0,
+      "claims_verified": 0,
+      "claims_unverified": 0,
+      "verification_rate": null,
+      "citations_total": 0,
+      "citations_valid": 0,
+      "citation_accuracy": null,
+      "hypothesis_confidence": null,
+      "root_cause_confidence": null
+    },
+    "customer_impact": {
+      "severity_initial": null,
+      "severity_final": null,
+      "severity_reduced": false,
+      "first_response_minutes": null,
+      "resolution_provided": false,
+      "escalation_prevented": null,
+      "escalation_to_engineering": false,
+      "customer_effort_required": null,
+      "follow_up_needed": null
+    },
+    "value": {
+      "engineer_hours_saved": null,
+      "escalation_prevented": null,
+      "pattern_contributed": false,
+      "knowledge_reused": false,
+      "reusable_for_future": null
+    },
+    "investigator": {
+      "primary": null,
+      "assisted_by": [],
+      "handoffs": 0,
+      "collaboration_sessions": 0
+    }
+  },
+
+  "feedback": {
+    "investigation_quality": {
+      "what_worked": [],
+      "what_didnt_work": [],
+      "time_sinks": []
+    },
+    "tool_feedback": [],
+    "pattern_suggestions": [],
+    "documentation_gaps": [],
+    "customer_feedback": {
+      "satisfaction_score": null,
+      "comments": null,
+      "collected_at": null
+    },
+    "lessons_learned": []
+  },
+
+  "audit_trail": {
+    "entries": [],
+    "summary": {
+      "total_actions": 0,
+      "by_actor": {},
+      "by_type": {}
+    }
+  },
+
+  "tool_usage": {
+    "token_budget": {
+      "tokens_max": 120000,
+      "tokens_reserved": 20000,
+      "tokens_budget": 85000,
+      "tokens_used": 0,
+      "tokens_remaining": 85000,
+      "budget_percentage": 0.0
+    },
+    "toolFallbacks": []
+  },
+
+  "escalation_attempts": [],
+
+  "metadata": {
+    "investigator": null,
+    "start_time": null,
+    "last_updated": null,
+    "total_duration_seconds": null,
+    "active_time_seconds": null,
+    "phases_completed": 0
+  }
+}
